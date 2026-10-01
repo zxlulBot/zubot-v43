@@ -1,0 +1,11 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ZUBOT QR FIX</title>
+<style>body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:15px}.box{background:#1a1a1a;border:1px solid #333;border-radius:14px;padding:15px;margin:15px 0}.btn{background:#25D366;color:#000;padding:16px;border:none;border-radius:12px;width:100%;font-weight:bold;font-size:18px}#qrImg{width:280px;height:280px;background:#fff;border-radius:14px;margin:10px auto;display:block}</style></head><body>
+<h1 style="color:#25D366">🤖 ZUBOT V39.4 - QR ONLY (ANTI GAGAL)</h1>
+<div class="box"><p id="status">⏳ Loading...</p></div>
+<div class="box"><button class="btn" onclick="newQR()">📷 GENERATE QR BARU (1 KALI AJA JIR!)</button><img id="qrImg" style="display:none"><div id="qrPlace" style="width:280px;height:280px;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;border-radius:14px;margin:10px auto">Klik tombol diatas jir</div><p style="font-size:12px">Buka WA > Perangkat Tertaut > Tautkan Perangkat > Scan QR ini dalam 20 detik!<br>JANGAN GENERATE BERKALI-KALI JIR!</p></div>
+<script>
+async function newQR(){document.getElementById('qrPlace').innerText='⏳ Bikin QR... 3 detik jir...';let r=await fetch('/api/qr/new');let d=await r.json();if(d.qr){document.getElementById('qrPlace').style.display='none';document.getElementById('qrImg').src=d.qr;document.getElementById('qrImg').style.display='block';}else{document.getElementById('qrPlace').innerText=d.error;}}
+async function check(){let r=await fetch('/api/status');let d=await r.json();document.getElementById('status').innerText=d.status + (d.connected?' ✅ CONNECTED!':' ❌ Belum'); if(d.status.includes('KONEK')){document.getElementById('qrPlace').innerText='✅ BOT AKTIF JIR!';}}
+setInterval(check,2000);check();
+</script>
+</body></html>
